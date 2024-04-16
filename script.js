@@ -11,42 +11,33 @@ const operators = ["+", "-", "*", "/"];
 const buttons = calculator.querySelectorAll(".button");
 buttons.forEach((button) => {
     button.addEventListener("click", (event) => {
-        let ready_to_be_operated = false;
-
         clicked_button = event.target.textContent;
 
-        display.textContent += clicked_button;
-
-        if (operators.includes(clicked_button)) {
-            first_number = display.textContent.slice(
-                0,
-                display.textContent.length - 1
-            );
-            operator = clicked_button;
-            console.log(operator);
-            display.textContent = "";
-            console.log(first_number);
-        }
-
-        if (clicked_button === "=") {
-            second_number = display.textContent;
-            display.textContent = "";
-            display.textContent = operate(
-                first_number,
-                operator,
-                second_number
-            );
-        }
-
-        if (clicked_button === "C") clear();
-
-        // if (non_displaying_operators.includes(clicked_button)) {
-        //     let non_displaying_operator = clicked_button;
-        // } else if (numbers.includes(clicked_button)) {
-        //     display_section += clicked_button;
-        // }
+        decideAction(clicked_button);
     });
 });
+
+function decideAction(clickedButton) {
+    display.textContent += clickedButton;
+
+    if (operators.includes(clickedButton)) {
+        first_number = display.textContent.slice(
+            0,
+            display.textContent.length - 1
+        );
+        operator = clickedButton;
+
+        display.textContent = "";
+    }
+
+    if (clickedButton === "=") {
+        second_number = display.textContent;
+        display.textContent = "";
+        display.textContent = operate(first_number, operator, second_number);
+    }
+
+    if (clickedButton === "C") clear();
+}
 
 function clear() {
     display.textContent = "";

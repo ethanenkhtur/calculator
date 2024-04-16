@@ -1,18 +1,16 @@
-let first_number = 0,
-    operator,
-    second_number;
+let first_number, operator, second_number;
 
 const calculator = document.querySelector(".calculator");
 const display = document.querySelector(".display");
 display.textContent = "";
 const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
 const operators = ["+", "-", "*", "/"];
+// let more_than_one_operation = false;
 
 const buttons = calculator.querySelectorAll(".button");
 buttons.forEach((button) => {
     button.addEventListener("click", (event) => {
         clicked_button = event.target.textContent;
-
         decideAction(clicked_button);
     });
 });
@@ -27,16 +25,22 @@ function decideAction(clickedButton) {
         );
         operator = clickedButton;
 
-        display.textContent = "";
+        // more_than_one_operation = true;
+
+        clearDisplay();
     }
 
     if (clickedButton === "=") {
         second_number = display.textContent;
-        display.textContent = "";
+        clearDisplay();
         display.textContent = operate(first_number, operator, second_number);
     }
 
     if (clickedButton === "C") clear();
+}
+
+function clearDisplay() {
+    display.textContent = "";
 }
 
 function clear() {

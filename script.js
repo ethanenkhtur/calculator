@@ -5,7 +5,7 @@ const display = document.querySelector(".display");
 display.textContent = "";
 const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
 const operators = ["+", "-", "*", "/"];
-// let more_than_one_operation = false;
+let one_operation = false;
 
 const buttons = calculator.querySelectorAll(".button");
 buttons.forEach((button) => {
@@ -19,24 +19,48 @@ function decideAction(clickedButton) {
     display.textContent += clickedButton;
 
     if (operators.includes(clickedButton)) {
-        first_number = display.textContent.slice(
-            0,
-            display.textContent.length - 1
-        );
-        operator = clickedButton;
+        if (!one_operation) {
+            first_number = display.textContent.slice(
+                0,
+                display.textContent.length - 1
+            );
+            operator = clickedButton;
+            one_operation = true;
 
-        // more_than_one_operation = true;
-
-        clearDisplay();
+            clearDisplay();
+        } else {
+            second_number = display.textContent;
+            clearDisplay();
+            first_number = operate(first_number, operator, second_number);
+            display.textContent = first_number;
+        }
+        console.log(one_operation);
     }
 
     if (clickedButton === "=") {
         second_number = display.textContent;
         clearDisplay();
         display.textContent = operate(first_number, operator, second_number);
+        one_operation = true;
     }
 
     if (clickedButton === "C") clear();
+
+    // if (operators.includes(clickedButton)) {
+    //     first_number = display.textContent.slice(
+    //         0,
+    //         display.textContent.length - 1
+    //     );
+    //     operator = clickedButton;
+
+    //     clearDisplay();
+    // }
+
+    // if (clickedButton === "=") {
+    //     second_number = display.textContent;
+    //     clearDisplay();
+    //     display.textContent = operate(first_number, operator, second_number);
+    // }
 }
 
 function clearDisplay() {
@@ -48,6 +72,7 @@ function clear() {
     first_number = null;
     second_number = null;
     operator = null;
+    one_operation = false;
 }
 
 function operate(num1, operator, num2) {

@@ -16,13 +16,12 @@ buttons.forEach((button) => {
 });
 
 function decideAction(clickedButton) {
-    display.textContent += clickedButton;
+    if (numbers.includes(clickedButton)) {
+        display.textContent += clickedButton;
+    }
 
     if (operators.includes(clickedButton)) {
-        first_number = display.textContent.slice(
-            0,
-            display.textContent.length - 1
-        );
+        first_number = display.textContent;
         operator = clickedButton;
 
         // more_than_one_operation = true;

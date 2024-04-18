@@ -24,8 +24,10 @@ function decideAction(clickedButton) {
         display.textContent += clickedButton;
     }
 
-    if (numbers.includes(clickedButton)) {
-        if (operator === "") {
+    // ------------------------------------------------------
+
+    // if (numbers.includes(clickedButton)) {
+    //     if (operator === "") {
             // if (!one_operation) {
             //     first_number += clickedButton;
             //     console.log(
@@ -37,12 +39,12 @@ function decideAction(clickedButton) {
             //         first_number + " => FIRST NUMBRER WITH ONEOPERATION = true"
             //     );
             // }
-            if (!one_operation) first_number += clickedButton;
-        } else {
-            second_number += clickedButton;
-            console.log(second_number + " => SECOND NUMBER");
-            one_operation = true;
-        }
+    //         if (!one_operation) first_number += clickedButton;
+    //     } else {
+    //         second_number += clickedButton;
+    //         console.log(second_number + " => SECOND NUMBER");
+    //         one_operation = true;
+    //     }
 
         // if (one_operation) {
         //     first_number = operate(
@@ -53,33 +55,37 @@ function decideAction(clickedButton) {
         // }
     }
 
-    if (operators.includes(clickedButton)) {
-        operator = clickedButton;
-        console.log(operator + " => THIS IS CURRENT OPERATOR");
-        console.log(
-            "Currently number 1: " +
-                first_number +
-                "\nNumber 2: " +
-                second_number
-        );
-        if (one_operation) {
-            first_number = operate(first_number, operator, second_number);
-        }
+    // if (operators.includes(clickedButton)) {
+    //     operator = clickedButton;
+    //     console.log(operator + " => THIS IS CURRENT OPERATOR");
+    //     console.log(
+    //         "Currently number 1: " +
+    //             first_number +
+    //             "\nNumber 2: " +
+    //             second_number
+    //     );
+    //     if (one_operation) {
+    //         first_number = operate(first_number, operator, second_number);
+    //     }
 
-        clearDisplay();
-    }
+    //     clearDisplay();
+    // }
 
-    if (clickedButton === "=") {
-        display.textContent = operate(first_number, operator, second_number);
-        console.log(
-            "RESULT: " + operate(first_number, operator, second_number)
-        );
-        one_operation = false;
-    }
+    // if (clickedButton === "=") {
+    //     display.textContent = operate(first_number, operator, second_number);
+    //     console.log(
+    //         "RESULT: " + operate(first_number, operator, second_number)
+    //     );
+    //     one_operation = false;
+    // }
 
-    if (clickedButton === "C") clear();
+    // if (clickedButton === "C") clear();
 
-    console.log("ITERATION ENDS");
+    // console.log("ITERATION ENDS");
+
+    //---------------------------------------------------------
+
+
     // if (operators.includes(clickedButton)) {
     //     if (!one_operation) {
     //         first_number = display.textContent;
@@ -104,6 +110,8 @@ function decideAction(clickedButton) {
     // }
 
     // if (clickedButton === "C") clear();
+
+    // ------------------------------------------
 
     // if (operators.includes(clickedButton)) {
     //     first_number = display.textContent;

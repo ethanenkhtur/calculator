@@ -7,4 +7,3 @@
 5. if another operator was hit, save the result into a first variable.
 6. if clear is hit, reset everything back to empty string.
 
-- 

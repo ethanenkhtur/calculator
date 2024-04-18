@@ -1,0 +1,10 @@
+1. Until an operator is clicked, first number is whatever is in the display
+2. Display is cleared and ready to start preparing second number. Also operator is assigned with whatever operator was clicked.
+3. As soon as another operator is hit or equal sign is hit, whatever is in the display is saved as the second number.
+4. if equal was hit, print the result and save the result into a first variable
+    a. Make sure that the first action of saving what is in the display as the first number has to be disabled. Perhaps use a boolean variable.
+    b. If anotehr  operator is hit, clear the display and wait until another operator or equal sign is pressed before assigning the display content into second variable.
+5. if another operator was hit, save the result into a first variable.
+6. if clear is hit, reset everything back to empty string.
+
+- 

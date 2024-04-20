@@ -5,7 +5,7 @@ const display = document.querySelector(".display");
 display.textContent = "";
 const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
 const operators = ["+", "-", "*", "/"];
-// let more_than_one_operation = false;
+// let more_than_has_two_or_more_operation = false;
 
 const buttons = calculator.querySelectorAll(".button");
 buttons.forEach((button) => {
@@ -17,26 +17,143 @@ buttons.forEach((button) => {
 
 function decideAction(clickedButton) {
     if (numbers.includes(clickedButton)) {
+        if (has_two_or_more_operation) clearDisplay();
         display.textContent += clickedButton;
     }
 
     if (operators.includes(clickedButton)) {
-        first_number = display.textContent;
+        if (!has_two_or_more_operation) {
+            first_number = display.textContent;
+            has_two_or_more_operation = true;
+            clearDisplay();
+        } else {
+            second_number = display.textContent;
+            display.textContent = operate(
+                first_number,
+                operator,
+                second_number
+            );
+            first_number = display.textContent;
+            second_number = "";
+        }
+
         operator = clickedButton;
-
-        // more_than_one_operation = true;
-
-        clearDisplay();
     }
 
     if (clickedButton === "=") {
+        // if (!has_two_or_more_operation)
         second_number = display.textContent;
-        clearDisplay();
+        // clearDisplay();
+
         display.textContent = operate(first_number, operator, second_number);
+        first_number = display.textContent;
+        second_number = "";
+        has_two_or_more_operation = false;
     }
 
     if (clickedButton === "C") clear();
+
+    // ------------------------------------------------------
+
+    // if (numbers.includes(clickedButton)) {
+    //     if (operator === "") {
+    // if (!has_two_or_more_operation) {
+    //     first_number += clickedButton;
+    //     console.log(
+    //         first_number + " => FIRST NUMBER  WITH ONEOPERATION = false"
+    //     );
+    // } else {
+    //     first_number = operate(first_number, operator, second_number);
+    //     console.log(
+    //         first_number + " => FIRST NUMBRER WITH ONEOPERATION = true"
+    //     );
+    // }
+    //         if (!has_two_or_more_operation) first_number += clickedButton;
+    //     } else {
+    //         second_number += clickedButton;
+    //         console.log(second_number + " => SECOND NUMBER");
+    //         has_two_or_more_operation = true;
+    //     }
+
+    // if (has_two_or_more_operation) {
+    //     first_number = operate(
+    //         display.textContent,
+    //         operator,
+    //         second_number
+    //     );
+    // }
 }
+
+// if (operators.includes(clickedButton)) {
+//     operator = clickedButton;
+//     console.log(operator + " => THIS IS CURRENT OPERATOR");
+//     console.log(
+//         "Currently number 1: " +
+//             first_number +
+//             "\nNumber 2: " +
+//             second_number
+//     );
+//     if (has_two_or_more_operation) {
+//         first_number = operate(first_number, operator, second_number);
+//     }
+
+//     clearDisplay();
+// }
+
+// if (clickedButton === "=") {
+//     display.textContent = operate(first_number, operator, second_number);
+//     console.log(
+//         "RESULT: " + operate(first_number, operator, second_number)
+//     );
+//     has_two_or_more_operation = false;
+// }
+
+// if (clickedButton === "C") clear();
+
+// console.log("ITERATION ENDS");
+
+//---------------------------------------------------------
+
+// if (operators.includes(clickedButton)) {
+//     if (!has_two_or_more_operation) {
+//         first_number = display.textContent;
+//         operator = clickedButton;
+//         has_two_or_more_operation = true;
+
+//         clearDisplay();
+//     } else {
+//         second_number = display.textContent;
+//         clearDisplay();
+//         first_number = operate(first_number, operator, second_number);
+//         display.textContent = first_number;
+//     }
+//     console.log(has_two_or_more_operation);
+// }
+
+// if (clickedButton === "=") {
+//     second_number = display.textContent;
+//     clearDisplay();
+//     display.textContent = operate(first_number, operator, second_number);
+//     has_two_or_more_operation = true;
+// }
+
+// if (clickedButton === "C") clear();
+
+// ------------------------------------------
+
+// if (operators.includes(clickedButton)) {
+//     first_number = display.textContent;
+//     operator = clickedButton;
+
+//     clearDisplay();
+// }
+
+// if (clickedButton === "=") {
+//     second_number = display.textContent;
+//     clearDisplay();
+//     display.textContent = operate(first_number, operator, second_number);
+// }
+// }
 
 function clearDisplay() {
     display.textContent = "";
@@ -44,9 +161,10 @@ function clearDisplay() {
 
 function clear() {
     display.textContent = "";
-    first_number = null;
-    second_number = null;
-    operator = null;
+    first_number = "";
+    second_number = "";
+    operator = "";
+    has_two_or_more_operation = false;
 }
 
 function operate(num1, operator, num2) {

@@ -22,7 +22,8 @@ function decideAction(clickedButton) {
 
     if (numbers.includes(clickedButton)) {
         if (has_two_or_more_operation) clearDisplay();
-        display.textContent += clickedButton;
+        if (display.textContent.length < 10)
+            display.textContent += clickedButton;
     }
 
     if (operators.includes(clickedButton)) {

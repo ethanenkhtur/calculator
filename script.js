@@ -7,7 +7,7 @@ const display = document.querySelector(".display");
 display.textContent = "";
 const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
 const operators = ["+", "-", "*", "/"];
-let one_operation = false;
+let has_two_or_more_operation = false;
 
 const buttons = calculator.querySelectorAll(".button");
 buttons.forEach((button) => {
@@ -21,26 +21,38 @@ function decideAction(clickedButton) {
     // console.log("ITERATION STARTS");
 
     if (numbers.includes(clickedButton)) {
+        if (has_two_or_more_operation) clearDisplay();
         display.textContent += clickedButton;
     }
 
     if (operators.includes(clickedButton)) {
-        if (!one_operation) {
+        if (!has_two_or_more_operation) {
             first_number = display.textContent;
+            has_two_or_more_operation = true;
+            clearDisplay();
+        } else {
+            second_number = display.textContent;
+            display.textContent = operate(
+                first_number,
+                operator,
+                second_number
+            );
+            first_number = display.textContent;
+            second_number = "";
         }
 
         operator = clickedButton;
-        clearDisplay();
     }
 
     if (clickedButton === "=") {
+        // if (!has_two_or_more_operation)
         second_number = display.textContent;
-        clearDisplay();
+        // clearDisplay();
 
         display.textContent = operate(first_number, operator, second_number);
-        first_number = operate(first_number, operator, second_number);
-        console.log("FIRST NUMBER: " + first_number);
-        one_operation = true;
+        first_number = display.textContent;
+        second_number = "";
+        has_two_or_more_operation = false;
     }
 
     if (clickedButton === "C") clear();
@@ -49,7 +61,7 @@ function decideAction(clickedButton) {
 
     // if (numbers.includes(clickedButton)) {
     //     if (operator === "") {
-    // if (!one_operation) {
+    // if (!has_two_or_more_operation) {
     //     first_number += clickedButton;
     //     console.log(
     //         first_number + " => FIRST NUMBER  WITH ONEOPERATION = false"
@@ -60,14 +72,14 @@ function decideAction(clickedButton) {
     //         first_number + " => FIRST NUMBRER WITH ONEOPERATION = true"
     //     );
     // }
-    //         if (!one_operation) first_number += clickedButton;
+    //         if (!has_two_or_more_operation) first_number += clickedButton;
     //     } else {
     //         second_number += clickedButton;
     //         console.log(second_number + " => SECOND NUMBER");
-    //         one_operation = true;
+    //         has_two_or_more_operation = true;
     //     }
 
-    // if (one_operation) {
+    // if (has_two_or_more_operation) {
     //     first_number = operate(
     //         display.textContent,
     //         operator,
@@ -85,7 +97,7 @@ function decideAction(clickedButton) {
 //             "\nNumber 2: " +
 //             second_number
 //     );
-//     if (one_operation) {
+//     if (has_two_or_more_operation) {
 //         first_number = operate(first_number, operator, second_number);
 //     }
 
@@ -97,7 +109,7 @@ function decideAction(clickedButton) {
 //     console.log(
 //         "RESULT: " + operate(first_number, operator, second_number)
 //     );
-//     one_operation = false;
+//     has_two_or_more_operation = false;
 // }
 
 // if (clickedButton === "C") clear();
@@ -107,10 +119,10 @@ function decideAction(clickedButton) {
 //---------------------------------------------------------
 
 // if (operators.includes(clickedButton)) {
-//     if (!one_operation) {
+//     if (!has_two_or_more_operation) {
 //         first_number = display.textContent;
 //         operator = clickedButton;
-//         one_operation = true;
+//         has_two_or_more_operation = true;
 
 //         clearDisplay();
 //     } else {
@@ -119,14 +131,14 @@ function decideAction(clickedButton) {
 //         first_number = operate(first_number, operator, second_number);
 //         display.textContent = first_number;
 //     }
-//     console.log(one_operation);
+//     console.log(has_two_or_more_operation);
 // }
 
 // if (clickedButton === "=") {
 //     second_number = display.textContent;
 //     clearDisplay();
 //     display.textContent = operate(first_number, operator, second_number);
-//     one_operation = true;
+//     has_two_or_more_operation = true;
 // }
 
 // if (clickedButton === "C") clear();
@@ -156,7 +168,7 @@ function clear() {
     first_number = "";
     second_number = "";
     operator = "";
-    one_operation = false;
+    has_two_or_more_operation = false;
 }
 
 function operate(num1, operator, num2) {

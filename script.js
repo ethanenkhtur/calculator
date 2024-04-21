@@ -39,13 +39,12 @@ function decideAction(clickedButton) {
     }
 
     if (clickedButton === "=") {
-        // if (!has_two_or_more_operation)
         second_number = display.textContent;
-        // clearDisplay();
 
-        display.textContent = checkForLength(
-            operate(first_number, operator, second_number)
-        );
+        if (first_number !== "" && second_number !== "")
+            display.textContent = checkForLength(
+                operate(first_number, operator, second_number)
+            );
         first_number = display.textContent;
         second_number = "";
         has_two_or_more_operation = false;

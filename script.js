@@ -31,10 +31,8 @@ function decideAction(clickedButton) {
             clearDisplay();
         } else {
             second_number = display.textContent;
-            display.textContent = operate(
-                first_number,
-                operator,
-                second_number
+            display.textContent = checkForLength(
+                operate(first_number, operator, second_number)
             );
             first_number = display.textContent;
             second_number = "";
@@ -48,13 +46,23 @@ function decideAction(clickedButton) {
         second_number = display.textContent;
         // clearDisplay();
 
-        display.textContent = operate(first_number, operator, second_number);
+        display.textContent = checkForLength(
+            operate(first_number, operator, second_number)
+        );
         first_number = display.textContent;
         second_number = "";
         has_two_or_more_operation = false;
     }
 
     if (clickedButton === "C") clear();
+}
+
+function checkForLength(content) {
+    if (content.length > 10) {
+        return content.slice(0, 10);
+    } else {
+        return content;
+    }
 }
 
 function clearDisplay() {
@@ -87,7 +95,7 @@ function operate(num1, operator, num2) {
             break;
     }
 
-    return result;
+    return result.toString();
 }
 
 function add(num1, num2) {

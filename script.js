@@ -74,7 +74,7 @@ function clear() {
 }
 
 function operate(num1, operator, num2) {
-    let result = 0;
+    let result;
 
     switch (operator) {
         case "+":
@@ -87,7 +87,11 @@ function operate(num1, operator, num2) {
             result = multiply(parseInt(num1), parseInt(num2));
             break;
         case "/":
-            result = divide(parseInt(num1), parseInt(num2));
+            if (parseInt(num2) === 0) {
+                result = "DON'T";
+            } else {
+                result = divide(parseInt(num1), parseInt(num2));
+            }
             break;
     }
 

@@ -27,6 +27,11 @@ function decideAction(clickedButton) {
         point_clicked = true;
     }
 
+    if (clickedButton === "." && !point_clicked) {
+        display.textContent += clickedButton;
+        point_clicked = true;
+    }
+
     if (operators.includes(clickedButton)) {
         if (!has_two_or_more_operation) {
             first_number = display.textContent;

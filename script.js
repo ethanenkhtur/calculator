@@ -8,6 +8,7 @@ display.textContent = "";
 const numbers = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0"];
 const operators = ["+", "-", "*", "/"];
 let has_two_or_more_operation = false;
+let point_clicked = false;
 
 const buttons = calculator.querySelectorAll(".button");
 buttons.forEach((button) => {
@@ -22,6 +23,11 @@ function decideAction(clickedButton) {
         if (has_two_or_more_operation) clearDisplay();
         if (display.textContent.length < 10)
             display.textContent += clickedButton;
+    }
+
+    if (clickedButton === "." && !point_clicked) {
+        display.textContent += clickedButton;
+        point_clicked = true;
     }
 
     if (operators.includes(clickedButton)) {
@@ -51,6 +57,7 @@ function decideAction(clickedButton) {
         first_number = display.textContent;
         second_number = "";
         has_two_or_more_operation = false;
+        point_clicked = false;
     }
 
     if (clickedButton === "C") clear();
@@ -74,6 +81,7 @@ function clear() {
     second_number = "";
     operator = "";
     has_two_or_more_operation = false;
+    point_clicked = false;
 }
 
 function operate(num1, operator, num2) {

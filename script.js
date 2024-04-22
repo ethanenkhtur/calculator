@@ -81,19 +81,19 @@ function operate(num1, operator, num2) {
 
     switch (operator) {
         case "+":
-            result = add(parseInt(num1), parseInt(num2));
+            result = add(num1, num2);
             break;
         case "-":
-            result = subtract(parseInt(num1), parseInt(num2));
+            result = subtract(num1, num2);
             break;
         case "*":
-            result = multiply(parseInt(num1), parseInt(num2));
+            result = multiply(num1, num2);
             break;
         case "/":
             if (parseInt(num2) === 0) {
                 result = "DON'T";
             } else {
-                result = divide(parseInt(num1), parseInt(num2));
+                result = divide(num1, num2);
             }
             break;
     }

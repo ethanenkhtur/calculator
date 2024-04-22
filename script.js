@@ -16,6 +16,17 @@ buttons.forEach((button) => {
     });
 });
 
+const backspace = calculator.querySelector(".backspace");
+backspace.addEventListener("click", () => {
+    display.textContent = display.textContent.slice(
+        0,
+        display.textContent.length - 1
+    );
+});
+
+const clear_button = calculator.querySelector(".clear-button");
+clear_button.addEventListener("click", () => clear());
+
 function decideAction(clickedButton) {
     if (numbers.includes(clickedButton)) {
         if (has_two_or_more_operation) clearDisplay();
@@ -61,8 +72,6 @@ function decideAction(clickedButton) {
         has_two_or_more_operation = false;
         point_clicked = false;
     }
-
-    if (clickedButton === "C") clear();
 }
 
 function checkForLength(content) {
